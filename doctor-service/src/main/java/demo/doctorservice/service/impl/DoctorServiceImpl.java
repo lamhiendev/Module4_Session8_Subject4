@@ -25,7 +25,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     @CircuitBreaker(name = "doctorServiceCB", fallbackMethod = "fallBackDoctor")
-    @RateLimiter(name = "searchDoctorLimit" , fallbackMethod = "fallBackDoctor")
+
     public Doctor getDoctorById(Long id) {
         Doctor newDoctor = doctorServiceRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy bác sĩ với ID " + id));
         return newDoctor;
