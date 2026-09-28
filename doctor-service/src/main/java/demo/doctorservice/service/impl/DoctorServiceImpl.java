@@ -5,6 +5,7 @@ import demo.doctorservice.exception.DoctorServiceUnavaialbeException;
 import demo.doctorservice.repository.DoctorServiceRepository;
 import demo.doctorservice.service.DoctorService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     @CircuitBreaker(name = "doctorServiceCB", fallbackMethod = "fallBackDoctor")
+    @RateLimiter(name = "searchDoctorLimit")
     public Doctor getDoctorById(Long id) {
         Doctor newDoctor = doctorServiceRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy bác sĩ với ID " + id));
         return newDoctor;
