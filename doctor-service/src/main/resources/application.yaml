@@ -3,10 +3,4 @@ spring:
     name: doctor-service
   config:
     import: "configserver:http://localhost:8888"
-resilience4j:
-  ratelimiter:
-    instances:
-      searchDoctorLimit:
-        limit-for-period: 5
-        limit-refresh-period: 10s
-        timeout-duration: 0ms
+

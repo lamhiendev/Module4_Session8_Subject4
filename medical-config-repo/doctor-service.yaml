@@ -14,3 +14,11 @@ eureka:
     fetch-registry: true
 server:
   port: 8082
+resilience4j:
+  ratelimiter:
+    rate-limiter-aspect-order: 1
+    instances:
+      searchDoctorLimit:
+        limit-for-period: 5
+        limit-refresh-period: 10s
+        timeout-duration: 0ms
